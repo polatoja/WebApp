@@ -1,0 +1,31 @@
+<!-- tasks/templates/tasks/login.html -->
+{% extends "base.html" %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+<div class="site_content">
+<h2>Login</h2>
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form.non_field_errors }}
+        
+        <div class="form-group">
+            <label for="id_username">Username:</label>
+            {{ form.username }}
+        </div>
+
+        <div class="form-group">
+            <label for="id_password">Password:</label>
+            {{ form.password }}
+        </div>
+        <div class="form-group">
+        <button type="submit">Login</button>
+        </div>
+        <p><a id="forgot-text" href="{% url 'password_reset_request' %}">Forgot your password?</a></p>
+    </form>
+
+
+</div>
+{% endblock %}

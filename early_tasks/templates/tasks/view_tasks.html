@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}My Tasks{% endblock %}
+
+{% block content %}
+<div class="site_content">
+    <div class="filter-container" data-url="/view_tasks" data-render-function="renderViewTasks">
+        <h2>My Tasks</h2>
+        <div class="filters">
+            {% include "tasks/filter_by_level_modal.html" %}
+            {% include "tasks/filter_by_status_modal.html" %}
+        </div>
+    </div>
+    {% csrf_token %}
+
+    <!-- Table to display active (incomplete) tasks -->
+    <h3>Active Tasks</h3>
+    <div id="filteredTasks">
+        <table>
+            <div id="user-role" data-role="{{ user_role }}"></div>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Level</th>
+                    {% if request.user.userprofile.role != 'user' %}
+                        <th>For</th>
+                    {% endif %}
+                    {% if request.user.userprofile.role != 'manager' %}
+                        <th>By</th>
+                    {% endif %}
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody id="tasks-table-body">
+                <!-- Dynamic task rows will be inserted here -->
+            </tbody>
+        </table>
+    </div>
+
+    {% include "tasks/status_modal.html" %}
+</div>
+{% endblock %}
+
+{% block styles %}
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+{% endblock %}
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>

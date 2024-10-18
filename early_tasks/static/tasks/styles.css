@@ -1,0 +1,320 @@
+body {
+    font-family: "Poppins", sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    background-image: linear-gradient(180deg,#7baaf5,#234a87);
+    background-attachment: fixed;
+    cursor: default;
+}
+
+a:visited, a:active {
+    color: white;
+    text-decoration: none;
+}
+
+a:hover{
+  color:white;
+  text-decoration: none;
+  opacity: 0.8;
+}
+
+a:link {
+    text-decoration: none;
+    cursor: pointer;
+}
+body,main,html{
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+.hero{
+  height: 100%;
+  width: 100%;
+  background-image:  url('/static/images/homepage_background.jpg');
+  background-size: cover;
+  background-position: center;
+}
+
+.hero-content {
+  padding: 10%;
+  color: black;
+  text-align: center;
+  position: relative;
+  max-width: 400px;
+}
+
+.site_content{
+  padding-top: 30px;
+  padding-left: 15%;
+  padding-right: 15%;
+}
+
+#site_name{
+  font-weight: 800;
+}
+  
+p {
+    font-family: verdana;
+    font-size: 20px;
+}
+
+.nav-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: white;
+  padding: 1.5% 7%;
+  font-weight: bold;
+}
+
+#nav-links {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: row;
+  width: auto;
+}
+
+#nav-links li {
+  margin: 0 20px;
+}
+
+#login-logout{
+  list-style: none;
+}
+
+table {
+  width: 100%;
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+
+th, td{
+  border: 1px solid black;
+  text-align: center;
+  padding: 2% 0%;
+}
+
+sign {
+  background-color: #81A5D1; /* Background color of the rounded rectangle */
+  color: white; /* Text color */
+  padding: 20px; /* Space inside the rectangle */
+  border-radius: 15px; /* Rounding the corners */
+  text-align: center; /* Center the text */
+  margin: 0 50px 50px; /* Keep the margin around, but remove the top margin */
+  font-size: 36px; /* Bigger font size for the header text */
+  font-weight: bold; /* Optional: Make the text bold */
+  margin-top: 100px; /* Add a top margin to lower the element */
+}
+
+
+/* Modal container */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1000; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgba(0, 0, 0, 0.5); /* Black background with opacity */
+}
+
+/* Modal content */
+.modal-content {
+  background-color: #fefefe;
+  margin: 10% auto; /* 10% from the top and centered */
+  padding: 20px;
+  border: 1px solid #888;
+  width: 50%; /* Adjust this to your preference */
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  animation: fadeIn 0.5s; /* Optional fade-in effect */
+}
+
+/* Close button */
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.close:hover, .close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+
+.modal-content [type=text], select {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.modal-content textarea {
+  width: 100%;
+  height: 40%;
+  padding: 12px 20px;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  background-color: #f8f8f8;
+  font-size: 16px;
+  resize: none;
+}
+
+.modal-content button{
+  border-radius: 4px;
+  border-color: #000;
+  border-width: 2px;
+  background-color: #ccc;
+  padding: 3px;
+  margin-top: 2%;
+  transition-duration: 0.4s;
+}
+
+.modal-content button:hover{
+  background-color: white;
+}
+
+.form-group input{
+  width: 96%;
+  padding: 2%;
+  margin: 2% 0 2% 0;
+  display: inline-block;
+  border: none;
+  background: #f1f1f1;
+}
+
+.form-group input:focus{
+  background-color: #bdbdbd;
+  outline: none;
+}
+
+.form-group button{
+  background-color: #000000;
+  color: white;
+  padding: 2%;
+  margin: 2% 0 2% 0;
+  border:  none;
+  cursor: pointer;
+  width: 100%;
+  opacity: 0.8;
+}
+
+.form-group button:hover{
+  opacity: 1;
+}
+
+.edit-button, .edit-button:visited, .edit-button:active, .delete-button, .delete-button:visited, .delete-button:active{
+  background-color: transparent;
+  border: none;
+  color: #C69E49;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.edit-button:hover, .delete-button:hover{
+  color:#888;
+}
+
+.delete-completed, .delete-completed:visited, .edelete-completed:active{
+  background-color: transparent;
+  border: none;
+  color: #C69E49;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.delete-completed:hover{
+  color:#888;
+}
+
+#add-button{
+  background-color: #C69E49;
+  width: 10%;
+  margin: 3%;
+  padding: 1%;
+  border: none;
+}
+
+#add-button:hover{
+  background-color: #ffcf66;
+  cursor: pointer;
+}
+
+.edit-status{
+  background-color: #C69E49;
+  padding: 5%;
+  border: none;
+}
+
+.edit-status:hover{
+  background-color: #ffcf66;
+  cursor: pointer;
+}
+
+.filter-container{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.filters{
+  display: flex;
+  flex-direction: row;
+}
+
+.filters > div{
+  width: 150px;
+  padding: 2%;
+  margin-right: 2%;
+}
+
+.rating-star{
+  color: grey;
+  cursor: pointer;
+}
+
+.rating-star:hover{
+  color: yellow;
+}
+
+.star-hovered {
+  color: yellow; /* Color when hovered or selected */
+}
+
+.non-rated-start{
+  color: grey;
+}
+
+.list-group-flush{
+  list-style: none;
+}
+
+#forgot-text, #register-to-login-redirect{
+  color:black;
+}
+
+#forgot-text:hover, #register-to-login-redirect:hover{
+  color: #C69E49;
+}
+
+#sign-up-redirect, #sign-up-redirect:visited{
+  color:#234a87;
+  font-weight: 900;
+}
+
+#sign-up-redirect:hover{
+  opacity: 0.8;
+}

@@ -1,0 +1,63 @@
+<!-- Manage Tasks Template (manage_tasks.html) -->
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Manage Tasks{% endblock %}
+
+{% block content %}
+<div class="site_content">
+    <div class="filter-container" data-url="/manage_tasks" data-render-function="renderManageTasks">
+        <h2>Manage Tasks</h2>
+        <div class="filters">
+            {% include "tasks/filter_by_level_modal.html" %}
+            {% include "tasks/filter_by_status_modal.html" %}
+        </div>
+    </div>
+
+<!-- Task Table -->
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Level</th>
+            <th>For</th>
+            <th>By</th>
+            <th>Status</th>
+            <th>Due date</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody id="tasks-table-body">
+        <!-- Dynamic task rows will be inserted here -->
+    </tbody>  
+</table>
+
+<!-- Add Task Button -->
+<button id="add-button" onclick="openAddModal()">Add New Task</button>
+
+{% include "tasks/manage_tasks_modals.html" %}
+
+</div>
+{% endblock %}
+
+{% block styles %}
+<!-- Move the jQuery UI stylesheet here -->
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+{% endblock %}
+
+<!-- External scripts and custom scripts -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+
+<script>
+    $(document).ready(function() {
+        // Apply the datepicker to the text field
+        $("#id_due_date").datepicker({
+            dateFormat: "yy-mm-dd", // Format that matches your backend expectations
+            changeMonth: true,      // Allow changing the month
+            changeYear: true,       // Allow changing the year
+            yearRange: "1900:2100"  // Range of years that can be selected
+        });
+    });
+</script>

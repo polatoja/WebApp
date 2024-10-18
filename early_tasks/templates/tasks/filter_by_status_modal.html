@@ -1,0 +1,15 @@
+    <!-- Filter by Status -->
+    <div class="card mb-4">
+        <h6 class="header">Filter by Status</h6>
+        <div class="list-group list-group-flush">
+            {% for status in status %}
+                {% if status != 'completed' %}
+                    <li class="list-group-item">
+                        <input class="filter-checkbox" data-filter="status" value="{{ status }}" type="checkbox" id="filter-{{ status }}">
+                        <label for="filter-{{ status }}">{{ status }}</label>
+                    </li>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+    

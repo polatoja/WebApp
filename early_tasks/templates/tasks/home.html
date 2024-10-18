@@ -1,0 +1,25 @@
+<!-- tasks/templates/tasks/home.html -->
+{% extends "base.html" %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home Page</title>
+</head>
+<body>
+    <div class="hero">
+        <div class="hero-content">
+            <h1>Manage tasks to pass your subjects early!</h1>
+            <p>Reach your goals with easy-to-read tables, progress tracking and more — all for free.</p>
+            {% if not request.user.is_authenticated %}
+                <div class="buttons">
+                    <a id="sign-up-redirect" href="/register/">Sign up for Free</a>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>
+{% endblock %}

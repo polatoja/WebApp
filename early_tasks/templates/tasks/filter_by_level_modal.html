@@ -1,0 +1,13 @@
+    <!-- Filter by Levels -->
+    <div class="card mb-4">
+        <h6 class="header">Filter by Levels</h6>
+        <div class="list-group list-group-flush">
+            {% for level in levels %}
+            <li class="list-group-item">
+                <input class="filter-checkbox" data-filter="level" value="{{ level }}" type="checkbox" id="filter-{{ level }}">
+                <label for="filter-{{ level }}">{{ level }}</label>
+            </li>
+            {% endfor %}
+        </div>
+    </div>
+    

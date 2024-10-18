@@ -1,0 +1,13 @@
+    <!-- Filter by Rating -->
+    <div class="card mb-4">
+        <h6 class="header">Filter by Rating</h6>
+        <div class="list-group list-group-flush">
+            {% for rating in ratings %}
+                <li class="list-group-item">
+                    <input class="filter-checkbox" data-filter="rating" value="{{ rating }}" type="checkbox" id="filter-{{ rating }}">
+                    <label for="filter-{{ rating }}">{{ rating }}</label>
+                </li>
+            {% endfor %}
+        </div>
+    </div>
+    

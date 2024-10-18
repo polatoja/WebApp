@@ -1,0 +1,53 @@
+<!-- tasks/templates/tasks/register.html -->
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="site_content">
+    <h2>Register</h2>
+    
+    <p>Fill out the form below to create an account.</p>
+    
+    <form method="post" class="form">
+        {% csrf_token %}
+        
+        <div class="form-group">
+            <label for="id_username">Username:</label>
+            {{ form.username }}
+            <div class="form-error">
+                {{ form.username.errors }}
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <label for="id_email">Email:</label>
+            {{ form.email }}
+            <div class="form-error">
+                {{ form.email.errors }}
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <label for="id_password">Password:</label>
+            {{ form.password }}
+            <div class="form-error">
+                {{ form.password.errors }}
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <label for="id_password_confirm">Confirm Password:</label>
+            {{ form.password_confirm }}
+            <div class="form-error">
+                {{ form.password_confirm.errors }}
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <button type="submit">Register</button>
+        </div>
+    </form>
+
+    <p>Already have an account? <a id="register-to-login-redirect" href="{% url 'login' %}">Log in here</a>.</p>
+</div>
+{% endblock %}
