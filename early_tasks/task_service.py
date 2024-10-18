@@ -26,7 +26,7 @@ def delete_task(task_id):
 
 def edit_task(request, task_id):
     task = get_object_or_404(Task, id=task_id)
-    form = TaskForm(request.POST, instance=task)
+    form = TaskForm(request.POST, instance=task) # pre-fill
     if form.is_valid():
         task = form.save()
         task_data = model_to_dict(task)

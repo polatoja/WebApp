@@ -5,10 +5,11 @@
     <meta charset="UTF-8">
     <title>{% block title %}Task Management App{% endblock %}</title>
     <link rel="stylesheet" href="{% static 'tasks/styles.css' %}">
-
     <link rel="icon" href="{% static 'images/logo.png' %}" type="image/png">
+    
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
     <!-- jQuery UI -->
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
@@ -25,7 +26,7 @@
             <div class="nav-container">
                 <a id="site_name" href="{% url 'home' %}">Early Tasks</a>
                 <ul id="nav-links">
-                    <!-- Add the rest of the links similarly as in your original code -->
+                    <!-- Manu Bar -->
                     {% if request.user.is_authenticated %}
                         {% if request.user.userprofile.role == 'admin' %}
                             
@@ -81,22 +82,23 @@
     </main>
 
     <script>
-        // Function to check if the user is still logged in
+        // checking if user is still logged in
         function checkSession() {
             const csrfToken = document.querySelector('input[name="csrfmiddlewaretoken"]');
     
             if (!csrfToken) {
-                window.location.href = '/';  // Redirect to home page
+                window.location.href = '/';  // -> home page
             }
         }
     
-        // Set an interval to check session every minute (60000 ms)
+        // checking every 60000ms
         setInterval(checkSession, 60000);
     </script>
 
 </body>
 </html>
 
+<!-- javascript files -->
 <script src="{% static 'js/manage_tasks.js' %}"></script>
 <script src="{% static 'js/rate.js' %}"></script>
 <script src="{% static 'js/view_tasks.js' %}"></script>

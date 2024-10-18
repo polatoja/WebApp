@@ -17,7 +17,7 @@ class LoginViewTest(TestCase):
             'username': 'testuser',
             'password': 'testpass',
         })
-        self.assertEqual(response.status_code, 302)  # Redirect after successful login
+        self.assertEqual(response.status_code, 302) # 302 - redirect to home page
         self.assertTrue(response.wsgi_request.user.is_authenticated)
 
     def test_login_failure(self):

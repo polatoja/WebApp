@@ -63,7 +63,7 @@ def get_task_data(task, fields = None):
 
     task_data = {}
 
-    for field in fields:
+    for field in fields: # asigning fields values
         if field == 'assigned_user':
             task_data[field] = task.assigned_user.username if task.assigned_user else 'None'
         elif field == 'created_by':
@@ -76,7 +76,6 @@ def get_task_data(task, fields = None):
     return task_data
 
 def gather_task_data(tasks, fields):
-    """Utility to gather task data and unique levels and statuses."""
     tasks_list = []
     levels, statuses, ratings = set(), set(), set()
     

@@ -1,4 +1,3 @@
-<!-- Completed Tasks Template (completed_tasks.html) -->
 {% extends "base.html" %}
 {% load static %}
 
@@ -14,7 +13,7 @@
         </div>
     </div>
 
-    <!-- Completed Task Table -->
+    <!-- completed tasks // table -->
     <table>
         <div id="user-role" data-role="{{ user_role }}"></div>
         <thead>
@@ -35,7 +34,7 @@
             </tr>
         </thead>
         <tbody id="completed-tasks-table-body">
-            <!-- Dynamic task rows for completed tasks will be inserted here -->
+            <!-- dynamic row implementation -->
         </tbody>  
     </table>
 
@@ -44,10 +43,11 @@
 {% endblock %}
 
 {% block styles %}
-<!-- Move the jQuery UI stylesheet here -->
+\
+<!-- jQuery UI -->
 <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 {% endblock %}
 
-<!-- External scripts and custom scripts -->
+<!-- external and custom scripts -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>

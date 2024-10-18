@@ -12,7 +12,7 @@ function rateTask(taskId, rating) {
         .then(response => response.json())
         .then(data => {
             if (data.success) {
-                location.reload();  // może do zmiany żeby nie reloadować strony?
+                location.reload();
             } else {
                 console.error('Error:', data.error);
             }

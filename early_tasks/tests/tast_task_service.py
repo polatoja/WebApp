@@ -6,12 +6,10 @@ from django.forms.models import model_to_dict
 class TaskManagementTest(TestCase):
 
     def setUp(self):
-        # Create a user and log them in
-        self.user = User.objects.create_user(username='testuser', password='testpass')
-        self.user_profile = UserProfile.objects.create(user=self.user, role='manager')  # Assuming you have UserProfile
-        self.client.login(username='testuser', password='testpass')
+        self.user = User.objects.create_user(username='testuser', password='testpass') # createing usser
+        self.user_profile = UserProfile.objects.create(user=self.user, role='manager')  # creating user
+        self.client.login(username='testuser', password='testpass') # logging in user
 
-        # Create a task
         self.task = Task.objects.create(
             name='Test Task',
             status='pending',
@@ -20,9 +18,8 @@ class TaskManagementTest(TestCase):
         )
 
     def test_add_task(self):
-        # Test adding a task via AJAX
         response = self.client.post(
-            reverse('manage_task_action', args=[0, 'add']),  # Adjust the URL pattern accordingly
+            reverse('manage_task_action', args=[0, 'add']),
             {'name': 'New Task', 'status': 'pending', 'level': 'medium'},
             HTTP_X_REQUESTED_WITH='XMLHttpRequest'
         )
@@ -33,18 +30,16 @@ class TaskManagementTest(TestCase):
         self.assertEqual(task_data['name'], 'New Task')
 
     def test_delete_task(self):
-        # Test deleting a task
         response = self.client.post(
-            reverse('manage_task_action', args=[self.task.id, 'delete']),  # Adjust the URL pattern accordingly
+            reverse('manage_task_action', args=[self.task.id, 'delete']),
             HTTP_X_REQUESTED_WITH='XMLHttpRequest'
         )
         self.assertEqual(response.status_code, 200)
         self.assertFalse(Task.objects.filter(id=self.task.id).exists())
 
     def test_edit_task(self):
-        # Test editing a task
         response = self.client.post(
-            reverse('manage_task_action', args=[self.task.id, 'edit']),  # Adjust the URL pattern accordingly
+            reverse('manage_task_action', args=[self.task.id, 'edit']), 
             {'name': 'Edited Task', 'status': 'completed', 'level': 'high'},
             HTTP_X_REQUESTED_WITH='XMLHttpRequest'
         )

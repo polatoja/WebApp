@@ -97,44 +97,44 @@ th, td{
 }
 
 sign {
-  background-color: #81A5D1; /* Background color of the rounded rectangle */
-  color: white; /* Text color */
-  padding: 20px; /* Space inside the rectangle */
-  border-radius: 15px; /* Rounding the corners */
-  text-align: center; /* Center the text */
-  margin: 0 50px 50px; /* Keep the margin around, but remove the top margin */
-  font-size: 36px; /* Bigger font size for the header text */
-  font-weight: bold; /* Optional: Make the text bold */
-  margin-top: 100px; /* Add a top margin to lower the element */
+  background-color: #81A5D1;
+  color: white;
+  padding: 20px;
+  border-radius: 15px;
+  text-align: center;
+  margin: 0 50px 50px;
+  font-size: 36px;
+  font-weight: bold;
+  margin-top: 100px;
 }
 
 
-/* Modal container */
+/* modal container */
 .modal {
-  display: none; /* Hidden by default */
-  position: fixed; /* Stay in place */
-  z-index: 1000; /* Sit on top */
+  display: none;
+  position: fixed;
+  z-index: 1000;
   left: 0;
   top: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
-  overflow: auto; /* Enable scroll if needed */
-  background-color: rgba(0, 0, 0, 0.5); /* Black background with opacity */
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.5);
 }
 
-/* Modal content */
+/* modal content */
 .modal-content {
   background-color: #fefefe;
-  margin: 10% auto; /* 10% from the top and centered */
+  margin: 10% auto;
   padding: 20px;
   border: 1px solid #888;
-  width: 50%; /* Adjust this to your preference */
+  width: 50%;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  animation: fadeIn 0.5s; /* Optional fade-in effect */
+  animation: fadeIn 0.5s;
 }
 
-/* Close button */
+/* close button */
 .close {
   color: #aaa;
   float: right;
@@ -148,7 +148,6 @@ sign {
   text-decoration: none;
   cursor: pointer;
 }
-
 
 .modal-content [type=text], select {
   width: 100%;
@@ -291,7 +290,7 @@ sign {
 }
 
 .star-hovered {
-  color: yellow; /* Color when hovered or selected */
+  color: yellow;
 }
 
 .non-rated-start{

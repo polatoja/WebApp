@@ -33,12 +33,9 @@ class Task(models.Model):
     level = models.CharField(max_length=10, choices=LEVEL_CHOICES, default='Easy')
     due_date = models.DateField(null=True, blank=True)
     assigned_user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
-    created_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name='created_tasks', null=True)  # For the manager/admin who creates the task
-    rating = models.IntegerField(null=True, blank=True)  # New field for task rating
-
-    # users = models.ManyToManyField(User, related_name='assigned_tasks', blank=True)  # Users who have added this task to their list
-
-
+    created_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name='created_tasks', null=True)
+    rating = models.IntegerField(null=True, blank=True)
+    
     def __str__(self):
         return f"{self.name} - {self.get_status_display()} ({self.get_level_display()})"
     

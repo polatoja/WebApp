@@ -1,25 +1,25 @@
 let taskIdToDelete = null;
 
-// Fetch tasks from the server and render them in the table
+
 function fetchManageTasks() {
     if (window.location.pathname.includes('/manage_tasks/'))
     {
         fetch('/manage_tasks/', {
             headers: {
-                'X-Requested-With': 'XMLHttpRequest'  // Mark this as an AJAX request
+                'X-Requested-With': 'XMLHttpRequest'
             }
         })
         .then(response => response.json())
         .then(tasks => {
-            renderManageTasks(tasks);  // Render the tasks in the table
+            renderManageTasks(tasks);
         })
         .catch(error => console.error('Error fetching tasks:', error));
     }
 }
 
-// Handle form submission for adding a new task
+// submission for adding a new task
 document.getElementById('addTaskForm')?.addEventListener('submit', function(event) {
-    event.preventDefault();  // Prevent the default form submission
+    event.preventDefault();
 
     const taskData = {
         name: document.getElementById('add_task_name').value,
@@ -30,57 +30,50 @@ document.getElementById('addTaskForm')?.addEventListener('submit', function(even
         assigned_user: document.getElementById('add_task_assigned_user').value
     };
 
-    // Send the task data via AJAX
     fetch('/manage_tasks/0/add/', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
-            'X-CSRFToken': getCsrfToken(),  // Include the CSRF token for Django
-            'X-Requested-With': 'XMLHttpRequest'  // Mark as an AJAX request
+            'X-CSRFToken': getCsrfToken(),
+            'X-Requested-With': 'XMLHttpRequest'
         },
-        body: new URLSearchParams(taskData)  // Format the data as URL-encoded
+        body: new URLSearchParams(taskData)
     })
     .then(response => response.json())
     .then(data => {
         if (data.task) {
             console.log('Task added:', data.task);
-            addTaskToTable(data.task);  // Add the task to the table dynamically
-            closeAddModal();  // Close the modal after successful submission
+            addTaskToTable(data.task);
+            closeAddModal();
         } else if (data.errors) {
             console.error('Form validation errors:', data.errors);
-            // Handle form validation errors (e.g., display errors in the modal)
         }
     })
     .catch(error => console.error('Error adding task:', error));
 });
 
-// Render the fetched tasks in the table
 function renderManageTasks(tasks) {
     const tableBody = document.getElementById('tasks-table-body');
-    tableBody.innerHTML = '';  // Clear existing rows
+    tableBody.innerHTML = '';  // clear existing rows
 
     tasks.forEach(task => {
-        const row = createManageTaskRow(task);  // Create each row
-        tableBody.appendChild(row);  // Append the row to the table body
+        const row = createManageTaskRow(task);
+        tableBody.appendChild(row);
     });
 }
 
-// Add a new task to the table
 function addTaskToTable(task) {
     const tableBody = document.getElementById('tasks-table-body');
-    const row = createManageTaskRow(task);  // Create the row
-    tableBody.appendChild(row);  // Append the new row to the table
+    const row = createManageTaskRow(task);
+    tableBody.appendChild(row);
 }
 
-// Helper function to get CSRF token
 function getCsrfToken() {
     return document.querySelector('input[name="csrfmiddlewaretoken"]').value;
 }
 
-// Call the fetchTasks function when the page loads
 document.addEventListener('DOMContentLoaded', fetchManageTasks);
 
-// Functions to open and close modals
 function openAddModal(taskId, taskName) {
 
     var nameField = document.getElementById('add_task_name');
@@ -104,11 +97,11 @@ function openAddModal(taskId, taskName) {
     var assignedUserField = document.getElementById('add_task_assigned_user');
     assignedUserField.options[0].selected = true;
 
-    $("#addModal").show(); // Show the modal with jQuery
+    $("#addModal").show();
 }
 
 function closeAddModal() {
-    $("#addModal").hide(); // Hide the modal with jQuery
+    $("#addModal").hide();
 }
 
 function updateTaskInTable(updatedTask) {
@@ -118,13 +111,11 @@ function updateTaskInTable(updatedTask) {
         return;
     }
 
-    // Log task row for debugging
     console.log("Updating task:", updatedTask);
     
     taskRow.querySelector('.task-name').textContent = updatedTask.name;
     taskRow.querySelector('.task-description').textContent = updatedTask.description;
 
-    // Update task level, handle missing element
     const levelElement = taskRow.querySelector('.task-level');
     if (levelElement) {
         levelElement.textContent = updatedTask.level;
@@ -136,7 +127,6 @@ function updateTaskInTable(updatedTask) {
     taskRow.querySelector('.task-created-by').textContent = updatedTask.created_by || 'Unknown';
     taskRow.querySelector('.task-status').textContent = updatedTask.status;
 
-    // Optionally, update the due date if it exists
     const dueDateElement = taskRow.querySelector('.task-due-date');
     if (dueDateElement) {
         dueDateElement.textContent = updatedTask.due_date ? updatedTask.due_date : 'N/A';
@@ -145,9 +135,9 @@ function updateTaskInTable(updatedTask) {
     editButton.setAttribute('onclick', `openEditModal('${updatedTask.id}', '${updatedTask.name}', '${updatedTask.description}', '${updatedTask.status}', '${updatedTask.level}', '${updatedTask.due_date}', '${updatedTask.assigned_user}',)`);
     const deleteButton = taskRow.querySelector(`.delete-button`);
     deleteButton.setAttribute('onclick', `openDeleteModal('${updatedTask.id}', '${updatedTask.name}')`);
-    // Highlight the updated row
-    taskRow.classList.add('task-updated');  // Add a class to indicate that the row was updated
-    setTimeout(() => taskRow.classList.remove('task-updated'), 3000);  // Remove the class after 3 seconds
+
+    taskRow.classList.add('task-updated');
+    setTimeout(() => taskRow.classList.remove('task-updated'), 3000);
     
 }
 
@@ -156,10 +146,8 @@ function openEditModal(taskId, taskName, taskDescription, taskStatus, taskLevel,
     var editModal = document.getElementById('editModal');
     if (!editModal) return;
 
-    // Open the modal
     editModal.style.display = 'block';
 
-    // Populate the form fields with the task data
     var nameField = document.getElementById('id_name');
     if (nameField) nameField.value = taskName;
 
@@ -188,7 +176,7 @@ function openEditModal(taskId, taskName, taskDescription, taskStatus, taskLevel,
         }
     }
 
-    // Set a hidden input to pass the taskId
+    // setting a hidden input to pass the taskId
     let taskIdInput = document.querySelector('input[name="task_id"]');
     if (!taskIdInput) {
         taskIdInput = document.createElement('input');
@@ -201,10 +189,11 @@ function openEditModal(taskId, taskName, taskDescription, taskStatus, taskLevel,
 
 
 document.getElementById('editForm')?.addEventListener('submit', function(event) {
-    event.preventDefault();  // Prevent traditional form submission
+    event.preventDefault();
 
-    const taskId = document.querySelector('input[name="task_id"]').value;  // Get task ID
-    // Collect updated task data
+    const taskId = document.querySelector('input[name="task_id"]').value;
+    
+    // get updated task data
     const taskData = {
         name: document.getElementById('id_name').value,
         description: document.getElementById('id_description').value,
@@ -214,25 +203,23 @@ document.getElementById('editForm')?.addEventListener('submit', function(event) 
         assigned_user: document.getElementById('id_assigned_user').value
     };
 
-    // Send the data via AJAX to the backend
     fetch(`/manage_tasks/${taskId}/edit/`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
-            'X-CSRFToken': getCsrfToken(),  // Include the CSRF token
+            'X-CSRFToken': getCsrfToken(),
             'X-Requested-With': 'XMLHttpRequest'
         },
-        body: new URLSearchParams(taskData)  // Convert taskData to URL-encoded format
+        body: new URLSearchParams(taskData)
     })
     .then(response => response.json())
     .then(data => {
         if (data.task) {
             console.log('Task updated:', data.task);
-            updateTaskInTable(data.task);  // Update the task row in the table
-            closeEditModal();  // Close the modal after successful update
+            updateTaskInTable(data.task);
+            closeEditModal();
         } else if (data.errors) {
             console.error('Form validation errors:', data.errors);
-            // Handle validation errors (e.g., display them in the modal)
         }
     })
     .catch(error => console.error('Error editing task:', error));
@@ -240,10 +227,9 @@ document.getElementById('editForm')?.addEventListener('submit', function(event) 
 
 
 function closeEditModal() {
-    $("#editModal").hide(); // Hide the modal with jQuery
+    $("#editModal").hide();
 }
 
-// Create a table row for a task
 function createManageTaskRow(task) {
     const row = document.createElement('tr');
     row.setAttribute('data-task-id', task.id);

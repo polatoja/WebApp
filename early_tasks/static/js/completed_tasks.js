@@ -1,33 +1,32 @@
 let completedTaskIdToDelete = null;
 
-// Fetch completed tasks from the server and render them in the table
+// fetch completed tasks from the server and put them in the table
 function fetchCompletedTasks() {
     if (window.location.pathname.includes('/completed_tasks/'))
     {
         fetch('/completed_tasks/', {
             headers: {
-                'X-Requested-With': 'XMLHttpRequest'  // Mark this as an AJAX request
+                'X-Requested-With': 'XMLHttpRequest'  // an ajax request
             }
         })
         .then(response => response.json())
         .then(tasks => {
-            renderCompletedTasks(tasks);  // Render the tasks in the completed tasks table
+            renderCompletedTasks(tasks);
         })
         .catch(error => console.error('Error fetching completed tasks:', error));
     }
 }
 
-// Render the fetched completed tasks in the table
 function renderCompletedTasks(tasks) {
     console.log('Rendering completed tasks:', tasks);
     const tableBody = document.getElementById('completed-tasks-table-body');
 
     const userRole = document.getElementById('user-role').getAttribute('data-role');
-    tableBody.innerHTML = '';  // Clear existing rows
+    tableBody.innerHTML = '';  // clear existing rows
 
     tasks.forEach(task => {
-        const row = createCompletedTaskRow(task, userRole);  // Create each row
-        tableBody.appendChild(row);  // Append the row to the table body
+        const row = createCompletedTaskRow(task, userRole);
+        tableBody.appendChild(row);  // adding the row to table
         if(task.rating)
             if(task.rating > 0) document.getElementById(`${task.id}-star-1`).style.color = "yellow";
             if(task.rating > 1) document.getElementById(`${task.id}-star-2`).style.color = "yellow";
@@ -37,15 +36,13 @@ function renderCompletedTasks(tasks) {
     });
 }
 
-// Remove a completed task row from the table
 function removeCompletedTaskFromTable(taskId) {
     const row = document.querySelector(`tr[data-task-id="${taskId}"]`);
     if (row) {
-        row.remove();  // Remove the row from the table
+        row.remove();
     }
 }
 
-// Create a table row for a completed task
 function createCompletedTaskRow(task, userRole) {
     const row = document.createElement('tr');
     row.setAttribute('data-task-id', task.id);
@@ -101,12 +98,12 @@ function createCompletedTaskRow(task, userRole) {
 }
 
 $(document).ready(function() {
-    // Use event delegation for dynamically added stars
+    // event delegation for dynamically added stars
     $(document).on('mouseenter', '.rating-star', function() {
-        var taskId = $(this).attr('id').split('-')[0];  // Extract task ID from the star's id
-        var starNumber = $(this).attr('id').split('-')[2];  // Extract the star number from the star's id
+        var taskId = $(this).attr('id').split('-')[0];
+        var starNumber = $(this).attr('id').split('-')[2];  // getting star number from the star's id
 
-        // Loop through all stars for the same task and highlight them up to the hovered one
+        // highlight stars to go with rating
         for (var i = 1; i <= starNumber; i++) {
             console.log(`Lightning star with id ${"#" + taskId + "-star-" + i}`);
             $("#" + taskId + "-star-" + i).addClass('star-hovered');
@@ -114,15 +111,14 @@ $(document).ready(function() {
     });
 
     $(document).on('mouseleave', '.rating-star', function() {
-        var taskId = $(this).attr('id').split('-')[0];  // Extract task ID from the star's id
+        var taskId = $(this).attr('id').split('-')[0];
 
-        // Remove the hover effect from all stars for the same task
+        // remove the hover effect from all stars for the same task
         for (var i = 1; i <= 5; i++) {
             $("#" + taskId + "-star-" + i).removeClass('star-hovered');
         }
     });
 });
 
-
-// Fetch completed tasks when the page loads
+// fetch completed tasks when the page loads
 document.addEventListener('DOMContentLoaded', fetchCompletedTasks);

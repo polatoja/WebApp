@@ -1,4 +1,3 @@
-<!-- Manage Tasks Template (manage_tasks.html) -->
 {% extends "base.html" %}
 {% load static %}
 
@@ -29,11 +28,11 @@
         </tr>
     </thead>
     <tbody id="tasks-table-body">
-        <!-- Dynamic task rows will be inserted here -->
+        <!-- task rows are inserted dynamically -->
     </tbody>  
 </table>
 
-<!-- Add Task Button -->
+<!-- adding task button -->
 <button id="add-button" onclick="openAddModal()">Add New Task</button>
 
 {% include "tasks/manage_tasks_modals.html" %}
@@ -42,22 +41,21 @@
 {% endblock %}
 
 {% block styles %}
-<!-- Move the jQuery UI stylesheet here -->
 <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 {% endblock %}
 
-<!-- External scripts and custom scripts -->
+<!-- external and custom scripts -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
 
 <script>
     $(document).ready(function() {
-        // Apply the datepicker to the text field
+        // the datepicker in the text field
         $("#id_due_date").datepicker({
-            dateFormat: "yy-mm-dd", // Format that matches your backend expectations
-            changeMonth: true,      // Allow changing the month
-            changeYear: true,       // Allow changing the year
-            yearRange: "1900:2100"  // Range of years that can be selected
+            dateFormat: "yy-mm-dd",
+            changeMonth: true,      // allow changing the month
+            changeYear: true,       // allow changing the year
+            yearRange: "1900:2100"  // range of years that can be selected
         });
     });
 </script>

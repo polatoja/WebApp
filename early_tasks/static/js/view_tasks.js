@@ -1,4 +1,3 @@
-// Fetch tasks from the server and render them in the table
 function fetchViewTasks() {
     if (window.location.pathname.includes('/view_tasks/'))
     {
@@ -15,20 +14,17 @@ function fetchViewTasks() {
     }
 }
 
-// Render the fetched tasks in the table
 function renderViewTasks(tasks) {
     const tableBody = document.getElementById('tasks-table-body');
 
     const userRole = document.getElementById('user-role').getAttribute('data-role');
-    tableBody.innerHTML = '';  // Clear existing rows
-
+    tableBody.innerHTML = '';
     tasks.forEach(task => {
         const row = createViewTaskRow(task, userRole);
         tableBody.appendChild(row);
     });
 }
 
-// Create a table row for a task
 function createViewTaskRow(task, userRole) {
     const row = document.createElement('tr');
     row.setAttribute('data-task-id', task.id);
@@ -55,7 +51,6 @@ function createViewTaskRow(task, userRole) {
     return row;
 }
 
-// Open the status modal
 function openStatusModal(taskId, currentStatus) {
     const modal = document.getElementById('statusModal');
     if (!modal) return;
@@ -69,14 +64,11 @@ function openStatusModal(taskId, currentStatus) {
     modal.style.display = 'block';
 }
 
-// Close the status modal
 function closeStatusModal() {
     const modal = document.getElementById('statusModal');
     if (modal) modal.style.display = 'none';
 }
 
-// Handle form submission for updating task status
-// listener zanim strona si ewladowuje - stad wszedzie error a dziala
 document.getElementById('statusForm')?.addEventListener('submit', function(event) {
     event.preventDefault();
 
@@ -108,7 +100,6 @@ document.getElementById('statusForm')?.addEventListener('submit', function(event
     .catch(error => console.error('Error updating task status:', error));
 });
 
-// Update the task row in the table after status change
 function updateTaskStatusInTable(updatedTask) {
     const taskRow = document.querySelector(`tr[data-task-id="${updatedTask.id}"]`);
     if (taskRow) {
@@ -116,10 +107,8 @@ function updateTaskStatusInTable(updatedTask) {
     }
 }
 
-// Helper function to get CSRF token
 function getCsrfToken() {
     return document.querySelector('input[name="csrfmiddlewaretoken"]').value;
 }
 
-// Call fetchTasks when the page loads
 document.addEventListener('DOMContentLoaded', fetchViewTasks);

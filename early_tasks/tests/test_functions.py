@@ -10,24 +10,19 @@ from datetime import datetime
 class TaskUtilityTest(TestCase):
 
     def setUp(self):
-        # Set up users
         self.user = User.objects.create_user(username='testuser', password='testpass')
         self.manager = User.objects.create_user(username='testmanager', password='managerpass')
         
-        # Create profiles
         self.user_profile = UserProfile.objects.create(user=self.user, role='user')
         self.manager_profile = UserProfile.objects.create(user=self.manager, role='manager')
         
-        # Create some tasks
         self.task1 = Task.objects.create(name='Task 1', description='task1', status='pending', level='easy', due_date = datetime.now(),assigned_user=self.user, created_by=self.manager)
         self.task2 = Task.objects.create(name='Task 2', description='task2', status='completed', level='hard', due_date = datetime.now(), assigned_user=self.user, created_by=self.manager)
         self.task3 = Task.objects.create(name='Task 3', description='task3', status='in-progress', level='medium', due_date = datetime.now(), assigned_user=self.user, created_by=self.manager)
 
-        # Set up request factory
         self.factory = RequestFactory()
 
     def test_role_required_decorator_user_role(self):
-        """ Test role_required decorator for 'user' role """
 
         @role_required(allowed_roles=['user'])
         def dummy_view(request):
@@ -40,7 +35,6 @@ class TaskUtilityTest(TestCase):
         self.assertEqual(response.status_code, 200)
 
     def test_role_required_decorator_manager_role(self):
-        """ Test role_required decorator for 'manager' role """
 
         @role_required(allowed_roles=['manager'])
         def dummy_view(request):
@@ -53,7 +47,6 @@ class TaskUtilityTest(TestCase):
         self.assertEqual(response.status_code, 200)
 
     def test_role_required_forbidden(self):
-        """ Test role_required decorator where user does not have permission """
 
         @role_required(allowed_roles=['manager'])
         def dummy_view(request):
@@ -67,7 +60,6 @@ class TaskUtilityTest(TestCase):
         self.assertEqual(response.content.decode(), "You do not have permission to access this page.")
 
     def test_filter_tasks_by_params(self):
-        """ Test filter_tasks_by_params function for task filtering """
         request = self.factory.get('/?level[]=easy&status[]=pending')
         request.user = self.user
 
@@ -76,7 +68,6 @@ class TaskUtilityTest(TestCase):
         self.assertEqual(filtered_tasks[0], self.task1)
 
     def test_filter_tasks_by_user_role(self):
-        """ Test filter_tasks_by_params with user role filtering """
         request = self.factory.get('/?level[]=medium&status[]=in-progress')
         request.user = self.user
 
@@ -85,7 +76,6 @@ class TaskUtilityTest(TestCase):
         self.assertEqual(filtered_tasks[0], self.task3)
 
     def test_get_task_data(self):
-        """ Test get_task_data function for fetching task data """
         task_data = get_task_data(self.task1)
         expected_data = {
             'id': self.task1.id,
@@ -101,7 +91,6 @@ class TaskUtilityTest(TestCase):
         self.assertEqual(task_data, expected_data)
 
     def test_gather_task_data(self):
-        """ Test gather_task_data function for gathering task data and metadata """
         tasks = Task.objects.all()
         task_data_list, levels, statuses, ratings = gather_task_data(tasks, ['id', 'name', 'status', 'level'])
 
@@ -110,6 +99,3 @@ class TaskUtilityTest(TestCase):
         self.assertEqual(levels, ['easy', 'hard', 'medium'])
         self.assertEqual(statuses, ['completed', 'in-progress', 'pending'])
         self.assertEqual(ratings, [None])
-
-
-# Run the tests

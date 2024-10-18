@@ -71,10 +71,9 @@ class TaskForm(forms.ModelForm):
         model = Task
         fields = ['name', 'description', 'status', 'level', 'due_date', 'assigned_user']
         widgets = {
-            'due_date': forms.DateInput(attrs={'type': 'date'}),  # Add an id
+            'due_date': forms.DateInput(attrs={'type': 'date'}),
         }
         
-        # Ensure the form expects the date in DD-MM-YYYY format
         due_date = forms.DateField(input_formats=['%d-%m-%Y'])
 
     def save(self, commit=True):

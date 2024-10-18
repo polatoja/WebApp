@@ -8,7 +8,7 @@ document.getElementById('reset-password-form')?.addEventListener('submit', funct
         method: 'POST',
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
-            'X-CSRFToken': getCsrfToken(),  // Django-specific if CSRF is enabled
+            'X-CSRFToken': getCsrfToken(),
             'X-Requested-With': 'XMLHttpRequest',
         },
         body: new URLSearchParams(email)

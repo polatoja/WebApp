@@ -1,10 +1,10 @@
 function openStatusModal(taskId, taskName) {
-    $("#statusModal").show();  // Show the modal
-    $('input[name="task_id"]').val(taskId);  // Set the task ID in the hidden field
+    $("#statusModal").show();
+    $('input[name="task_id"]').val(taskId);  // setting the task ID in the hidden field
 }
 
 function closeStatusModal() {
-    $("#statusModal").hide();  // Hide the modal
+    $("#statusModal").hide();
 }
 
 document.getElementById('statusForm').addEventListener('submit', function(event) {
@@ -27,7 +27,7 @@ document.getElementById('statusForm').addEventListener('submit', function(event)
         if (data.success) {
             alert('Status submitted successfully!');
             closeStatusModal();
-            location.reload();  // Reload the page to see the updated status
+            location.reload();
         } else {
             console.error('Error:', data.error);
         }
@@ -35,14 +35,9 @@ document.getElementById('statusForm').addEventListener('submit', function(event)
     .catch(error => console.error('Error:', error));
 });
 
-// Update the task status in the table dynamically
 function updateTaskStatusInTable(taskId, status) {
     const taskRow = document.querySelector(`tr[data-task-id="${taskId}"]`);
     if (taskRow) {
-        // Update the row with the new status (assuming you want to show the status in a specific column)
         taskRow.querySelector('.task-status').textContent = status;
     }
 }
-
-// Call this function where you want to open the status modal
-// Example usage: openStatusModal(taskId);
